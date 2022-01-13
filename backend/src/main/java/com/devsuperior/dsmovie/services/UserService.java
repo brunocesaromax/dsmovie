@@ -14,7 +14,13 @@ public class UserService {
 
     @Transactional
     public User findOrCreateByEmail(String email) {
-        return repository.findByEmail(email)
-                .orElse(repository.saveAndFlush(new User(email)));
+        User user = repository.findByEmail(email).orElse(null);
+
+        if (user == null) {
+            user = new User(email);
+            user = repository.saveAndFlush(user);
+        }
+
+        return user;
     }
 }

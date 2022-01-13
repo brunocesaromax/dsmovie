@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  db:
+    image: postgres:12.5
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234567"
+    ports:
+      - "54320:5432"
+    volumes:
+      - ./backend/docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - dsmovie-net
+networks:
+  dsmovie-net:
+    driver: bridge
