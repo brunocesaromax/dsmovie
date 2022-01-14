@@ -1,6 +1,3 @@
-language: java
-jdk: oraclejdk17
-
 jobs:
   include:
     - language: java
@@ -9,6 +6,19 @@ jobs:
         - cd backend/
       script:
         - mvn clean package -Dmaven.test.skip
+      before_deploy:
+        - docker-compose build
+        - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+        deploy:
+          skip_cleanup: true
+          provider: script
+          script:
+            docker tag dsmovie-backend:latest $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
+            docker tag dsmovie-frontend:latest $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
+            docker push $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
+            docker push $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
+          on:
+            branch: main
 
     - language: node_js
       node_js: 16
@@ -17,19 +27,5 @@ jobs:
       script:
         - yarn install
 
-    - stage: deploy
-      before_deploy:
-        - docker-compose build
-        - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-      deploy:
-        skip_cleanup: true
-        provider: script
-        script:
-          docker tag dsmovie-backend:latest $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
-          docker tag dsmovie-frontend:latest $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
-          docker push $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
-          docker push $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
-        on:
-          branch: main
 notifications:
   email: false
