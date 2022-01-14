@@ -26,7 +26,7 @@ function Listing() {
                 const data = response.data as MoviePage;
                 setPage(data);
             });
-    }, [pageNumber]);
+    }, [pageNumber]); // Quando pageNumber ser alterado a paginação é chamada por causa do useEffect
 
     const handlePageChange = (newPageNumber: number) => setPageNumber(newPageNumber);
 
