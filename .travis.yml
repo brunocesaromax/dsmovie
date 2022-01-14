@@ -13,18 +13,20 @@ jobs:
         - cd frontend/
       script:
         - yarn install
-before_deploy:
-  - docker-compose build
-  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-deploy:
-  skip_cleanup: true
-  provider: script
-  script:
-    docker tag dsmovie-backend:latest $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
-    docker tag dsmovie-frontend:latest $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
-    docker push $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
-    docker push $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
-  on:
-    branch: main
+
+    - stage: deploy
+      before_deploy:
+        - docker-compose build
+        - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script:
+          docker tag dsmovie-backend:latest $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
+          docker tag dsmovie-frontend:latest $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
+          docker push $DOCKER_USERNAME/dsmovie-backend:$TRAVIS_JOB_ID;
+          docker push $DOCKER_USERNAME/dsmovie-frontend:$TRAVIS_JOB_ID;
+        on:
+          branch: main
 notifications:
   email: false
