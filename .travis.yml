@@ -6,6 +6,7 @@ jobs:
         - sudo apt-get update
         - cd backend/
         - mvn clean package -Dmaven.test.skip
+        - cd ../
       script: docker-compose build
       before_deploy:
         - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
