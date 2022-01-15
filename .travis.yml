@@ -8,6 +8,7 @@ jobs:
         - mvn clean package -Dmaven.test.skip
       script: docker-compose build
       before_deploy:
+        - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
         - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
       deploy:
         - provider: script
