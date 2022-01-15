@@ -20,7 +20,7 @@ jobs:
       skip_cleanup: true
     - provider: heroku
       api_key:
-        secure: HEROKU_API_KEY
+        secure: "UNLy3yklpcLKInckTtHc2ZNksRpMwKM6GOGfiTIlNY3F7kI6HiVa9TgyhY682yHbvW2C8pNlqdCJo9cbkmwIDe70Ef0/M365w0iTV3ojcRpyWQGtmiv9MwYLWFuMx1ow3aK5ilhmjkI9ZSXAYDNHE9mpbPs2DE1pBx+dc3zfcX9k9MznWbrR9ArVee6FL7FMpBE6tVq65srQpCgQAbJptUpRzLbHpfdm8KDgZZv1tlsHJAZ1TmnfWCduV+mi4BQAMd9Onx/ZyZRf/+xizH9AiLvlyZQOamKaCAWDVbN9K1BV10xZ/VapF3GiN/da6qyxWsAyRlbOw3moTLTgeWdH0uBKsjTeVdLW7L2yzyd5hKYhzS2Brz5xZtA0F8cXi2AQ12q11GZ61JrPdig8jGx4K6RD9iH5vldjZm4yNIDmrCu60VECxKl51y7vSJK2d2O7Jf9ZmIN9x5OkkHAAIFUqlkDbX+CGryRKExiiKYPwISs/BNdqcJJ1NqzJXo3HX9YfwMTH1jQeUHBEzDl6sjwsLUsa1ln1ulkMHBzqfyyFzpTE2ZhWQhqrMtOCzkoblGCASUbV19aSk5MfUp9/Gp5ckCQlsiu1MOgUeRUmik7/HSt56CABHG3wC6dQlyX8iPPbFBopm+C0wJSBwEes6BybBXo0EugK3N0E5lYro5Sp/LQ="
       app: $HEROKU_APP_NAME
       on:
         branch: main
@@ -33,5 +33,3 @@ jobs:
     - yarn install
 notifications:
   email: false
-dd:
-  secure: $DD_TOKEN
