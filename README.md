@@ -31,7 +31,6 @@ A aplicação consiste em avaliar filmes pela internet.
 ### Front end
 - HTML / CSS / JS / Typescript
 - React / Axios
-- 
 
 ## Como executar o projeto
 
