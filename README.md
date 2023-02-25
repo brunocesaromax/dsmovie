@@ -3,8 +3,6 @@
 
 # Sobre o projeto
 
-https://bruno-cesar-dsmovie.netlify.app/
-
 DS Movie é uma aplicação full stack web construída durante o acompanhamento do evento __Semana DevSuperior 6.0__ organizado pela DevSuperior.
 
 A aplicação consiste em avaliar filmes pela internet.
